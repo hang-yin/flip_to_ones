@@ -4,6 +4,9 @@
 using namespace std;
 
 void flipToOnes(vector<vector<int>> &matrix) {
+    // If the matrix is empty, return
+    if (matrix.size() == 0) return;
+
     // Get the number of rows and columns in the matrix
     int m = matrix.size();
     int n = matrix[0].size();
@@ -46,6 +49,22 @@ void flipToOnes(vector<vector<int>> &matrix) {
     }
 }
 
+TEST(FlipToOnesTest, ExampleMatrix) {
+    // Create a matrix of all zeros
+    vector<vector<int>> matrix = {{1, 0, 0},
+                                  {0, 0, 0},
+                                  {0, 1, 0}};
+
+    // Set the row and column of the element with value 1 to 1
+    flipToOnes(matrix);
+
+    // Check that the matrix is correct
+    vector<vector<int>> expected = {{1, 1, 1},
+                                    {1, 1, 0},
+                                    {1, 1, 1}};
+    EXPECT_EQ(matrix, expected);
+}
+
 TEST(FlipToOnesTest, ZeroMatrix) {
     // Create a matrix of all zeros
     vector<vector<int>> matrix = {{0, 0, 0, 0},
@@ -56,12 +75,12 @@ TEST(FlipToOnesTest, ZeroMatrix) {
     // Set the row and column of the element with value 1 to 1
     flipToOnes(matrix);
 
-    // Check that the matrix is still all zeros
-    for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 4; j++) {
-            EXPECT_EQ(matrix[i][j], 0);
-        }
-    }
+    // Check that the matrix is correct
+    vector<vector<int>> expected = {{0, 0, 0, 0},
+                                    {0, 0, 0, 0},
+                                    {0, 0, 0, 0},
+                                    {0, 0, 0, 0}};
+    EXPECT_EQ(matrix, expected);
 }
 
 TEST(FlipToOnesTest, OneElement) {
@@ -74,16 +93,14 @@ TEST(FlipToOnesTest, OneElement) {
     // Set the row and column of the element with value 1 to 1
     flipToOnes(matrix);
 
-    // Check that the row and column of the element with value 1 are set to 1
-    for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 4; j++) {
-            if (i == 2 || j == 2) {
-                EXPECT_EQ(matrix[i][j], 1);
-            } else {
-                EXPECT_EQ(matrix[i][j], 0);
-            }
-        }
-    }
+    // Create the resulting matrix
+    vector<vector<int>> expected = {{0, 0, 1, 0},
+                                    {0, 0, 1, 0},
+                                    {1, 1, 1, 1},
+                                    {0, 0, 1, 0}};
+    
+    // Check that the matrix is set to the result
+    EXPECT_EQ(matrix, expected);
 }
 
 TEST(FlipToOnesTest, MultipleElements) {
@@ -97,17 +114,122 @@ TEST(FlipToOnesTest, MultipleElements) {
     flipToOnes(matrix);
 
     // Create the resulting matrix
-    vector<vector<int>> result = {{0, 1, 1, 0},
-                                  {1, 1, 1, 1},
-                                  {1, 1, 1, 1},
-                                  {1, 1, 1, 1}};
+    vector<vector<int>> expected = {{0, 1, 1, 0},
+                                    {1, 1, 1, 1},
+                                    {1, 1, 1, 1},
+                                    {1, 1, 1, 1}};
+    
+    EXPECT_EQ(matrix, expected);
+}
+
+TEST(FlipToOnesTest, DifferentDimensions) {
+    // Create a matrix with multiple elements set to 1
+    vector<vector<int>> matrix = {{0, 0, 0, 0, 0},
+                                  {0, 0, 1, 0, 0},
+                                  {0, 0, 1, 0, 0},
+                                  {0, 1, 0, 0, 0}};
+    
+    // Set the row and column of the element with value 1 to 1
+    flipToOnes(matrix);
+
+    // Create the resulting matrix
+    vector<vector<int>> result = {{0, 1, 1, 0, 0},
+                                  {1, 1, 1, 1, 1},
+                                  {1, 1, 1, 1, 1},
+                                  {1, 1, 1, 1, 1}};
     
     // Check that the matrix is set to the result
     for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 4; j++) {
+        for (int j = 0; j < 5; j++) {
             EXPECT_EQ(matrix[i][j], result[i][j]);
         }
     }
+}
+
+TEST(FlipToOnesTest, OneRow) {
+    // Create a matrix with a single row
+    vector<vector<int>> matrix = {{0, 0, 0, 0, 0}};
+
+    // Set the row and column of the element with value 1 to 1
+    flipToOnes(matrix);
+
+    // Check that the matrix is correct
+    vector<vector<int>> expected = {{0, 0, 0, 0, 0}};
+    EXPECT_EQ(matrix, expected);
+}
+
+TEST(FlipToOnesTest, OneColumn) {
+    // Create a matrix with a single column
+    vector<vector<int>> matrix = {{0},
+                                  {0},
+                                  {0},
+                                  {0},
+                                  {0}};
+
+    // Set the row and column of the element with value 1 to 1
+    flipToOnes(matrix);
+
+    // Check that the matrix is correct
+    vector<vector<int>> expected = {{0},
+                                    {0},
+                                    {0},
+                                    {0},
+                                    {0}};
+    EXPECT_EQ(matrix, expected);
+}
+
+TEST(FlipToOnesTest, OneElementMatrix) {
+    // Create a matrix with a single element
+    vector<vector<int>> matrix = {{0}};
+
+    // Set the row and column of the element with value 1 to 1
+    flipToOnes(matrix);
+
+    // Check that the matrix is correct
+    vector<vector<int>> expected = {{0}};
+    EXPECT_EQ(matrix, expected);
+}
+
+TEST(FlipToOnesTest, OneElementMatrixSetToOne) {
+    // Create a matrix with a single element
+    vector<vector<int>> matrix = {{1}};
+
+    // Set the row and column of the element with value 1 to 1
+    flipToOnes(matrix);
+
+    // Check that the matrix is correct
+    vector<vector<int>> expected = {{1}};
+    EXPECT_EQ(matrix, expected);
+}
+
+TEST(FlipToOnesTest, AllOnes){
+    // Create a matrix with all elements set to 1
+    vector<vector<int>> matrix = {{1, 1, 1, 1, 1},
+                                  {1, 1, 1, 1, 1},
+                                  {1, 1, 1, 1, 1},
+                                  {1, 1, 1, 1, 1}};
+
+    // Set the row and column of the element with value 1 to 1
+    flipToOnes(matrix);
+
+    // Check that the matrix is correct
+    vector<vector<int>> expected = {{1, 1, 1, 1, 1},
+                                    {1, 1, 1, 1, 1},
+                                    {1, 1, 1, 1, 1},
+                                    {1, 1, 1, 1, 1}};
+    EXPECT_EQ(matrix, expected);
+}
+
+TEST(FlipToOnesTest, EmptyMatrix) {
+    // Create an empty matrix
+    vector<vector<int>> matrix = {};
+
+    // Set the row and column of the element with value 1 to 1
+    flipToOnes(matrix);
+
+    // Check that the matrix is correct
+    vector<vector<int>> expected = {};
+    EXPECT_EQ(matrix, expected);
 }
 
 int main(int argc, char **argv) {

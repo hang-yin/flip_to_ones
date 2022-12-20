@@ -3,7 +3,14 @@
 
 using namespace std;
 
+/**
+ * @brief Sets the entire row and column to 1 for any element that is 1 in the given m by n matrix of 0's and 1's, in place.
+ * @param matrix A vector of vectors of integers representing the m by n matrix of 0's and 1's. The matrix is modified in place.
+*/
 void flipToOnes(vector<vector<int>> &matrix) {
+    // If the matrix is empty, return
+    if (matrix.size() == 0) return;
+
     // Get the number of rows and columns in the matrix
     int m = matrix.size();
     int n = matrix[0].size();
