@@ -8,15 +8,15 @@ This is a C++ program that for a given m by n matrix of 0's and 1's, if any elem
  - Input matrix is two-dimensional and can have arbitrary number of rows and columns.
 
 ## File Organization
- - src: contains the main cpp file with the function `flipToOnes`
- - test: contains a test files with a number of test cases
- - CMakeLists.txt: contains a set of directives and instructions describing source files and targets
+ - `src`: contains the main cpp file with the function `flipToOnes`
+ - `test`: contains a test file `flipToOnes_test` with a number of test cases
+ - `CMakeLists.txt`: contains a set of directives and instructions describing source files and targets
 
 ## Compilation Instructions
- - clone this repository
+ - clone this repository `git clone https://github.com/hang-yin/flip_to_ones`
  - cd into this directory `cd flip_to_ones`
  - create a build directory `mkdir build`
- - cd into the empty build directory
+ - cd into the empty build directory `cd build`
  - run `cmake ..`
  - run `make`
  - run `./flipToOnes` to execute the main function in `flipToOnes.cpp`
@@ -36,3 +36,4 @@ This is a C++ program that for a given m by n matrix of 0's and 1's, if any elem
    - since we are not storing any data structure that would scale with the size of the matrix, the space complexity would be O(1)
 
 ## Example Output
+![Screenshot from 2022-12-20 17-58-56](https://user-images.githubusercontent.com/60046203/208789546-d27d2c59-f108-4b20-babc-1f32ff09cfb3.png)
